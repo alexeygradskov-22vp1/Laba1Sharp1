@@ -61,6 +61,7 @@ namespace Laba1Sharp1
 
         private void showFields(int numberArguments)
         {
+            clearAllFields();
             switch (numberArguments)
             {
                 case 0:
@@ -336,6 +337,17 @@ namespace Laba1Sharp1
             }
             return result.ToString();
             
+        }
+
+        private void clearAllFields()
+        {
+            nameInputTB.Clear();
+            quantityOfBooksTB.Clear();
+            phoneInputTB.Clear();
+            addressInputTB.Clear();
+               squareInputTB.Clear();
+            avgNumberInputTB.Clear();
+            rateInputTB.Clear();
         }
     }
 }
