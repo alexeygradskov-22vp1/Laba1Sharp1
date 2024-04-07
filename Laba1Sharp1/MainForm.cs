@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -9,20 +10,30 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+using System.Xml.Linq;
 
 namespace Laba1Sharp1
 {
-    public partial class Form1 : Form
+
+    public partial class MainForm : Form
     {
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern int MessageBox(IntPtr hWnd, String text, String caption, uint type);
         Library selectedLibrary = null;
-        public Form1()
+        int typeOfLibrary = 0;
+        int managementType = 0;
+
+        public MainForm()
         {
+
             InitializeComponent();
             withoutArgumentRB.Checked = true;
             updateCounterLabel();
-            showMessageBox("Лабораторная работа 1. Градсков, Живов. 1 бригада", "Приветствие");
+            Library.Libraries.CollectionChanged += CollectionChangedHandler;
+            showMessageBox("Лабораторная работа 3. Градсков, Живов. 1 бригада", "Приветствие");
+            GeneralLbRB.Checked = true;
+            CultManagementRB.Checked = true;
         }
 
         private void updateCounterLabel()
@@ -30,25 +41,7 @@ namespace Laba1Sharp1
             objectCounterLabel.Text =$"Количество объектов: {Library.ObjectCounter}" ;
         }
 
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void withoutArgumentRB_CheckedChanged(object sender, EventArgs e)
         {
@@ -72,13 +65,13 @@ namespace Laba1Sharp1
                     squareInputTB.Visible = false;
                     avgNumberInputTB.Visible = false;
                     rateInputTB.Visible = false;
-                    label1.Visible = false;
-                    label2.Visible = false;
-                    label3.Visible = false;
-                    label4.Visible = false;
-                    label5.Visible = false;
-                    label6.Visible = false;
-                    label7.Visible = false;
+                    labelNameInput.Visible = false;
+                    labelQuantityInput.Visible = false;
+                    labelPhoneInput.Visible = false;
+                    labelAddressInput.Visible = false;
+                    labelSquareInput.Visible = false;
+                    labelAvgNumberOfVisitorsUnput.Visible = false;
+                    labelRateInput.Visible = false;
                     break;
                 case 1:
                     nameInputTB.Visible = true;
@@ -88,13 +81,13 @@ namespace Laba1Sharp1
                     squareInputTB.Visible = false;
                     avgNumberInputTB.Visible = false;
                     rateInputTB.Visible = false;
-                    label1.Visible = true;
-                    label2.Visible = false;
-                    label3.Visible = false;
-                    label4.Visible = false;
-                    label5.Visible = false;
-                    label6.Visible = false;
-                    label7.Visible = false;
+                    labelNameInput.Visible = true;
+                    labelQuantityInput.Visible = false;
+                    labelPhoneInput.Visible = false;
+                    labelAddressInput.Visible = false;
+                    labelSquareInput.Visible = false;
+                    labelAvgNumberOfVisitorsUnput.Visible = false;
+                    labelRateInput.Visible = false;
                     break;
                 case 2:
                     nameInputTB.Visible = true;
@@ -104,13 +97,13 @@ namespace Laba1Sharp1
                     squareInputTB.Visible = false;
                     avgNumberInputTB.Visible = false;
                     rateInputTB.Visible = false;
-                    label1.Visible = true;
-                    label2.Visible = true;
-                    label3.Visible = false;
-                    label4.Visible = false;
-                    label5.Visible = false;
-                    label6.Visible = false;
-                    label7.Visible = false;
+                    labelNameInput.Visible = true;
+                    labelQuantityInput.Visible = true;
+                    labelPhoneInput.Visible = false;
+                    labelAddressInput.Visible = false;
+                    labelSquareInput.Visible = false;
+                    labelAvgNumberOfVisitorsUnput.Visible = false;
+                    labelRateInput.Visible = false;
                     break;
                 case 7:
                     nameInputTB.Visible = true;
@@ -120,13 +113,13 @@ namespace Laba1Sharp1
                     squareInputTB.Visible = true;
                     avgNumberInputTB.Visible = true;
                     rateInputTB.Visible = true;
-                    label1.Visible = true;
-                    label2.Visible = true;
-                    label3.Visible = true;
-                    label4.Visible = true;
-                    label5.Visible = true;
-                    label6.Visible = true;
-                    label7.Visible = true;
+                    labelNameInput.Visible = true;
+                    labelQuantityInput.Visible = true;
+                    labelPhoneInput.Visible = true;
+                    labelAddressInput.Visible = true;
+                    labelSquareInput.Visible = true;
+                    labelAvgNumberOfVisitorsUnput.Visible = true;
+                    labelRateInput.Visible = true;
                     break;
             }
         }
@@ -159,26 +152,51 @@ namespace Laba1Sharp1
         }
 
         private void createBtn_Click(object sender, EventArgs e)
-        {
+        { 
+            
             try
             {
+                Management management = null;
+                switch (managementType)
+                {
+                    case 1:
+                        management = new CultureManagement();
+                        break;
+                    case 2:
+                        management = new LibraryDepartment();
+                        break;
+                    default: management = new CultureManagement(); break;
+                }
+                LibraryFactory factory = null;
+                switch (typeOfLibrary)
+                {
+                    case 1:
+                        factory = new GeneralLibrary();
+                        break;
+                    case 2:
+                        factory = new NationalLibrary();
+                        break;
+                    default:factory = new GeneralLibrary(); break;
+                }
                 Library library = null;
                 if (withoutArgumentRB.Checked)
                 {
-                    library = new Library();
+                    library = new Library(factory, management);
                 }
                 else if (oneArgumentRB.Checked)
                 {
-                    library = new Library(nameInputTB.Text);
+                    validData(name:nameInputTB.Text);
+                    library = new Library(factory,management,nameInputTB.Text);
                 }
                 else if (twoArgumentRB.Checked)
                 {
 
                     validData(name: nameInputTB.Text, quantityOfBooks: quantityOfBooksTB.Text);
-                    library = new Library(nameInputTB.Text, int.Parse(quantityOfBooksTB.Text));
+                    library = new Library(factory,management,  nameInputTB.Text, int.Parse(quantityOfBooksTB.Text));
                 }
                 else
                 {
+                    
                     validData(nameInputTB.Text, 
                         quantityOfBooksTB.Text, 
                         phoneInputTB.Text,
@@ -186,25 +204,30 @@ namespace Laba1Sharp1
                         squareInputTB.Text,
                         avgNumberInputTB.Text,
                         rateInputTB.Text);
-                    library = new Library(nameInputTB.Text,
+                    library = new Library(factory,management, nameInputTB.Text,
                         int.Parse(quantityOfBooksTB.Text),
                         phoneInputTB.Text, addressInputTB.Text,
                         float.Parse(squareInputTB.Text),
                         int.Parse(avgNumberInputTB.Text),
                         float.Parse(rateInputTB.Text));
                 }
-                Library.AddInList(library);
+                Library.AddInList(library.Name, library);
                 updateList();
                 updateCounterLabel();
             }
-            catch (CustInvalidArgumentException exc) { showMessageBox($"Ошибка: {exc.Message}\nПоле: {exc.Place}","Авария") ; }
+            catch (CustInvalidArgumentException exc) { 
+                Enabled = false; 
+                showMessageBox($"Ошибка: {exc.Message}\nПоле: {exc.Place}","Авария") ; 
+                Enabled = true; 
+                this.Activate();
+            }
         }
         private void updateList()
         {
             listOfLibrariesCB.Items.Clear();
-            foreach (var library in Library.Libraries)
+            foreach (var library in Library.Libraries.getAll())
             {
-                listOfLibrariesCB.Items.Add(library.Name);
+                listOfLibrariesCB.Items.Add(library.Value.Name);
             }
         }
 
@@ -215,13 +238,13 @@ namespace Laba1Sharp1
 
         private void showData()
         {
-            textBox9.Text = selectedLibrary.Name;
-            textBox8.Text = selectedLibrary.QuantityOfBooks.ToString();
-            textBox7.Text = selectedLibrary.Phone;
-            textBox6.Text = selectedLibrary.Address;
-            textBox5.Text = selectedLibrary.Square.ToString();
-            textBox4.Text = selectedLibrary.AvgNumberOfVisitors.ToString();
-            textBox3.Text = selectedLibrary.Rate.ToString();
+            nameChangeTB.Text = selectedLibrary.Name;
+            quantityChangeTB.Text = selectedLibrary.QuantityOfBooks.ToString();
+            phoneChangeTB.Text = selectedLibrary.Phone;
+            addressChangeTB.Text = selectedLibrary.Address;
+            squareChangeTB.Text = selectedLibrary.Square.ToString();
+            avgNumberChangeTB.Text = selectedLibrary.AvgNumberOfVisitors.ToString();
+            rateChangeTB.Text = selectedLibrary.Rate.ToString();
 
         }
 
@@ -229,7 +252,8 @@ namespace Laba1Sharp1
         {
             if (listOfLibrariesCB.SelectedIndex != -1)
             {
-                Library library = Library.Libraries[listOfLibrariesCB.SelectedIndex];
+                Library library = Library.Libraries.getEl(listOfLibrariesCB.SelectedItem.ToString());
+                
                 selectedLibrary = library;
                 showData();
             }
@@ -237,12 +261,13 @@ namespace Laba1Sharp1
 
         private void validData(string name,
             string quantityOfBooks = "0",
-            string phone = "880008000800",
+            string phone = "+79012310002",
             string address = "ул.Пушкина,д.12",
             string square = "0",
             string numberOfVisitors = "0",
             string rate = "0")
         {
+            
             if (string.IsNullOrWhiteSpace(name))
             {
                 throw new CustInvalidArgumentException("Значение не может быть пустым", "Название");
@@ -281,31 +306,57 @@ namespace Laba1Sharp1
         {
             try
             {
-                validData(textBox9.Text, textBox8.Text, textBox7.Text, textBox6.Text, textBox5.Text, textBox4.Text, textBox3.Text);
-                Library.Libraries[listOfLibrariesCB.SelectedIndex].Name = textBox9.Text;
-                Library.Libraries[listOfLibrariesCB.SelectedIndex].QuantityOfBooks = int.Parse(textBox8.Text);
-                Library.Libraries[listOfLibrariesCB.SelectedIndex].Phone = textBox7.Text;
-                Library.Libraries[listOfLibrariesCB.SelectedIndex].Address = textBox6.Text;
-                Library.Libraries[listOfLibrariesCB.SelectedIndex].Square = float.Parse(textBox5.Text);
-                Library.Libraries[listOfLibrariesCB.SelectedIndex].AvgNumberOfVisitors = int.Parse(textBox4.Text);
-                Library.Libraries[listOfLibrariesCB.SelectedIndex].Rate = float.Parse(textBox3.Text);
+                validData(nameChangeTB.Text, quantityChangeTB.Text, phoneChangeTB.Text, addressChangeTB.Text, squareChangeTB.Text, avgNumberChangeTB.Text, rateChangeTB.Text);
+               
+               Library library = new Library(new GeneralLibrary(), selectedLibrary.Management,  nameChangeTB.Text, int.Parse(quantityChangeTB.Text), phoneChangeTB.Text, addressChangeTB.Text,
+                    float.Parse(squareChangeTB.Text), int.Parse(avgNumberChangeTB.Text), float.Parse(rateChangeTB.Text));
+                Library.AddInList(library.Name, library);
+                Library.RemoveInList(listOfLibrariesCB.SelectedItem.ToString()); 
+                listOfLibrariesCB.SelectedItem= library.Name;
+                selectedLibrary = library;
+                
+                Enabled = false;
+                updateList();
                 showMessageBox("Сохранено", "Успех");
+                Enabled = true;
+                this.Activate();
+
             }
             catch(CustInvalidArgumentException exc)
             {
+                Enabled = false;
                 showMessageBox(exc.Message, "Авария");
+                Enabled = true;
+                this.Activate();
             }
+           
         }
 
         private void printBtn_Click(object sender, EventArgs e)
         {
-            String result = fetchData();
-            showMessageBox(result.ToString(), "Вывод");
+            if(selectedLibrary!=null)
+            {
+                String result = fetchData();
+                Enabled = false;
+                showMessageBox(result.ToString(), "Вывод");
+                Enabled=true;
+                this.Activate();
+            }
+            else
+            {
+                Enabled = false;
+                showMessageBox("Объект не выбран", "Ошибка");
+                Enabled = true;
+                this.Activate();
+            }
+           
         }
 
         private string fetchData()
         {
             StringBuilder result = new StringBuilder("");
+            result.AppendLine(selectedLibrary.Use());
+            result.AppendLine(selectedLibrary.Work());
             if (nameOutCB.Checked)
             {
                 result.AppendLine($"Название: {selectedLibrary.Name}");
@@ -348,6 +399,63 @@ namespace Laba1Sharp1
                squareInputTB.Clear();
             avgNumberInputTB.Clear();
             rateInputTB.Clear();
+        }
+         void CollectionChangedHandler(string action, string key)
+        {
+            this.Enabled = false;
+            showMessageBox(action, key);
+            this.Enabled = true;
+            this.Activate();
+        }
+
+        private void btnShowListOfObjects_Click(object sender, EventArgs e)
+        {
+            Enabled = false;
+            RepositoryShow repositoryShow = new RepositoryShow();
+            repositoryShow.ShowDialog();
+            Enabled = true;
+            this.Activate();
+
+        }
+
+        private void btnDetermineSpeedOfLists_Click(object sender, EventArgs e)
+        {
+            Enabled = false;
+            Test test = new Test();
+            test.ShowDialog();
+            Enabled = true;
+            this.Activate();
+
+        }
+
+        private void GeneralLbRB_CheckedChanged(object sender, EventArgs e)
+        {
+            typeOfLibrary = 1;
+        }
+
+        private void EducateLbRB_CheckedChanged(object sender, EventArgs e)
+        {
+            typeOfLibrary = 2;
+        }
+
+        private void CultManagementRB_CheckedChanged(object sender, EventArgs e)
+        {
+            managementType = 1;
+        }
+
+        private void LibDepartmentRB_CheckedChanged(object sender, EventArgs e)
+        {
+            managementType=2;
+        }
+
+        private void setRequestExtensions_Click(object sender, EventArgs e)
+        {
+            selectedLibrary.setRequestExt();
+        }
+
+        private void setIncreaseRequest_Click(object sender, EventArgs e)
+        {
+            selectedLibrary.setRequestIncrease();
         }
     }
 }

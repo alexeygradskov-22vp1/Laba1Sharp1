@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Laba1Sharp1.ArtisticBook">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ArtisticBook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba1Sharp1.Bibliographer">
+    <Position X="7.5" Y="5" Width="1.5" />
+    <InheritanceLine Type="Laba1Sharp1.Staff" FixedToPoint="true">
+      <Path>
+        <Point X="4.5" Y="3.103" />
+        <Point X="4.5" Y="4.846" />
+        <Point X="5.917" Y="4.846" Type="JumpStart" />
+        <Point X="6.083" Y="4.846" Type="JumpEnd" />
+        <Point X="7.042" Y="4.846" Type="JumpStart" />
+        <Point X="7.208" Y="4.846" Type="JumpEnd" />
+        <Point X="8.312" Y="4.846" />
+        <Point X="8.312" Y="5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bibliographer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba1Sharp1.Book">
+    <Position X="2" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Book.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba1Sharp1.CustInvalidArgumentException">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>CustInvalidArgumentException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba1Sharp1.EducateBook">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EducateBook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba1Sharp1.GeneralLibrary">
+    <Position X="2.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAI=</HashCode>
+      <FileName>GeneralLibrary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba1Sharp1.Librarian">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Librarian.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba1Sharp1.Library">
+    <Position X="7.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAgAIECIAAAAiAkEAABAAAQAAAAEgAAiAAAgNUAAIBY=</HashCode>
+      <FileName>Library.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba1Sharp1.LibraryFactory">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAI=</HashCode>
+      <FileName>LibraryFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba1Sharp1.MainForm">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KUDJAIEYbCbqI0IkYRCDBwACAQAgCJ9BCQkVAQphAYA=</HashCode>
+      <FileName>MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba1Sharp1.NationalLibrary">
+    <Position X="2.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAI=</HashCode>
+      <FileName>NationalLibrary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba1Sharp1.Program">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba2Sharp.Repository">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAEAAAAgAAAAAAACBAAAAAAIAICAAA=</HashCode>
+      <FileName>Repository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba1Sharp1.RepositoryShow">
+    <Position X="5.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RepositoryShow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba1Sharp1.Staff">
+    <Position X="3.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Staff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Laba1Sharp1.Test">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAABAAAACACAAAQAACAAAACAAAAAAAABAAABQEAAAA=</HashCode>
+      <FileName>Test.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Delegate Name="Laba2Sharp.CollectionChangedHandler">
+    <Position X="4.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repository.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

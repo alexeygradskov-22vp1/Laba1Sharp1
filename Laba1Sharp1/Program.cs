@@ -6,6 +6,10 @@ using System.Windows.Forms;
 
 namespace Laba1Sharp1
 {
+    /// <summary>
+    /// 22ВП1
+    /// Градсков. Живов бригада 1
+    /// </summary>
     internal static class Program
     {
         /// <summary>
@@ -16,7 +20,7 @@ namespace Laba1Sharp1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
     }
 }

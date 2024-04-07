@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Laba2Sharp;
+using System;
 using System.Collections.Generic;
 
 namespace Laba1Sharp1 {
@@ -7,35 +8,83 @@ namespace Laba1Sharp1 {
     /// </summary>
     class Library
     {
-
-
         private static int _increment = 0;
 
-
         private string _id;
-
 
         private string _name = "Не определено";
 
         private int _quantityOfBooks = 0;
 
-
         private string _phone = "Не определено";
-
 
         private string _address = "Не определено";
 
-
         private float _square = 0;
-
 
         private int _avgNumberOfVisitors = 0;
 
-
         private float _rate = 0;
 
-        private static List<Library> libraries = new List<Library>();
+        private static Repository libraries = new Repository();
+        private Staff _staff;
+        private Book _book;
+        private Management _management;
 
+
+        /// <summary>
+        /// конструктор по умолчанию
+        /// </summary>
+        public Library(LibraryFactory factory, Management management)
+        {
+            Name = $"Библиотека {_increment}";
+            _staff = factory.CreateStaff();
+            _book = factory.CreateBook();
+
+            _increment++;
+            _management = management;
+        }
+
+        /// <summary>
+        /// Конструктор, устанавливающий название библиотеки
+        /// </summary>
+        /// <param name="name">Название библотеки</param>
+        public Library(LibraryFactory factory, Management management, string name) : this(factory,management)
+        {
+            _name = name;
+        }
+
+        /// <summary>
+        /// Конструктор, устанавливающий название библиотеки и библиотечный фонд
+        /// </summary>
+        /// <param name="name">Название библиотеки</param>
+        /// <param name="quantityOfBooks">Библиотечный фонд</param>
+        public Library(LibraryFactory factory, Management management, string name, int quantityOfBooks) : this(factory,management,name)
+        {
+            _quantityOfBooks = quantityOfBooks;
+        }
+
+        /// <summary>
+        /// Конструктор, устанавливающий название библиотеки, библиотечный фонд, номер телефона, адрес, площадь, среднее число
+        /// посетителей, рейтинг
+        /// </summary>
+        /// <param name="name">Название библиотеки</param>
+        /// <param name="quantityOfBooks">Библиотечный фонд</param>
+        /// <param name="phone">Номер телефона</param>
+        /// <param name="address">Адрес</param>
+        /// <param name="square">Площадь</param>
+        /// <param name="avgNumberOfVisitors">Среднее число посетителей</param>
+        /// <param name="profit">Рейтинг</param>
+        
+        public Library(LibraryFactory factory, Management management, string name, int quantityOfBooks, string phone, string address,
+            float square, int avgNumberOfVisitors, float profit) : this(factory,management,name, quantityOfBooks)
+        {
+            _avgNumberOfVisitors = avgNumberOfVisitors;
+            _phone = phone;
+            _address = address;
+            _square = square;
+            _rate = profit;
+        }
 
         public string ID
         {
@@ -60,6 +109,8 @@ namespace Laba1Sharp1 {
             get => _quantityOfBooks;
             set => _quantityOfBooks = value;
         }
+
+        public Management Management { get => _management; }
 
         /// <summary>
         /// свойство для получения и изменения поля _phone
@@ -106,54 +157,7 @@ namespace Laba1Sharp1 {
             set => _rate = value;
         }
 
-        /// <summary>
-        /// конструктор по умолчанию
-        /// </summary>
-        public Library()
-        {
-            Name = $"Библиотека {_increment}";
-            _increment++;
-        }
-
-        /// <summary>
-        /// Конструктор, устанавливающий название библиотеки
-        /// </summary>
-        /// <param name="name">Название библотеки</param>
-        public Library(string name) : this()
-        {
-            _name = name;
-        }
-        /// <summary>
-        /// Конструктор, устанавливающий название библиотеки и библиотечный фонд
-        /// </summary>
-        /// <param name="name">Название библиотеки</param>
-        /// <param name="quantityOfBooks">Библиотечный фонд</param>
-
-        public Library(string name, int quantityOfBooks) : this(name)
-        {
-            _quantityOfBooks = quantityOfBooks;
-        }
-        /// <summary>
-        /// Конструктор, устанавливающий название библиотеки, библиотечный фонд, номер телефона, адрес, площадь, среднее число
-    /// посетителей, рейтинг
-    /// </summary>
-    /// <param name="name">Название библиотеки</param>
-    /// <param name="quantityOfBooks">Библиотечный фонд</param>
-    /// <param name="phone">Номер телефона</param>
-    /// <param name="address">Адрес</param>
-    /// <param name="square">Площадь</param>
-    /// <param name="avgNumberOfVisitors">Среднее число посетителей</param>
-    /// <param name="profit">Рейтинг</param>
-
-        public Library(string name, int quantityOfBooks, string phone, string address,
-            float square, int avgNumberOfVisitors, float profit) : this(name, quantityOfBooks)
-        {
-            _avgNumberOfVisitors = avgNumberOfVisitors;
-            _phone = phone;
-            _address = address;
-            _square = square;
-            _rate = profit;
-        }
+        
         /// <summary>
         /// свойство для получения _increment
         /// </summary>
@@ -163,9 +167,9 @@ namespace Laba1Sharp1 {
             get { return _increment; }
         }
         /// <summary>
-        /// свойство для получения libraries
+        /// свойство для получения _libraries
         /// </summary>
-        public static List<Library> Libraries
+        public static Repository Libraries
         {
             get => libraries;
         }
@@ -174,15 +178,43 @@ namespace Laba1Sharp1 {
         /// метод добавления в список библиотек
         /// </summary>
         /// <param name="library">Библиотека</param>
-        public static void AddInList( Library library)
+        public static void AddInList(string key, Library library)
         {
-            libraries.Add(library);
+            libraries.add(key, library);
+        }
+        public string Work()
+        {
+            return _staff.Work();
+        }
+
+        /// <summary>
+        /// Вызывает метод Use у объекта самолета.
+        /// </summary>
+        public string Use()
+        {
+           return _book.Use();
+        }
+
+        public void setRequestExt()
+        {
+            _management.extensionRequest(_name);
+        }
+
+        public void setRequestIncrease()
+        {
+            _management.increaseBooksRequest(_name);
+        }
+
+        public static void RemoveInList(string key)
+        {
+            libraries.remove(key);
+            _increment--;
         }
         /// <summary>
         /// Метод для вывода всех полей
         /// </summary>
         /// <returns>Название библиотеки, библиотечный фонд, номер телефона, адрес, площадь, среднее число посетителей,
-    /// рейтинг</returns>
+        /// рейтинг</returns>
         public override string ToString()
         {
             return $"Название: {_name}\n" +
