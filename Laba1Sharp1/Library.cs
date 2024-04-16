@@ -205,6 +205,11 @@ namespace Laba1Sharp1 {
             _management.increaseBooksRequest(_name);
         }
 
+        public String getManagement()
+        {
+            return _management.getName();
+        }
+
         public static void RemoveInList(string key)
         {
             libraries.remove(key);

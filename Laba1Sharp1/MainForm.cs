@@ -211,7 +211,8 @@ namespace Laba1Sharp1
                         int.Parse(avgNumberInputTB.Text),
                         float.Parse(rateInputTB.Text));
                 }
-                Library.AddInList(library.Name, library);
+                LibraryCommandAdd libraryCommandAdd = new LibraryCommandAdd(library.Name, library);
+                libraryCommandAdd.Execute();
                 updateList();
                 updateCounterLabel();
             }
@@ -450,12 +451,48 @@ namespace Laba1Sharp1
 
         private void setRequestExtensions_Click(object sender, EventArgs e)
         {
-            selectedLibrary.setRequestExt();
+            if (selectedLibrary != null)
+            {
+                selectedLibrary.setRequestExt();
+                Enabled = false;
+                showMessageBox($"Заявка в {selectedLibrary.getManagement()} на расширение библиотеки отправлен!", "Вывод");
+                Enabled = true;
+                this.Activate();
+            }
+            else
+            {
+                Enabled = false;
+                showMessageBox("Объект не выбран", "Ошибка");
+                Enabled = true;
+                this.Activate();
+            }
+            
         }
 
         private void setIncreaseRequest_Click(object sender, EventArgs e)
         {
-            selectedLibrary.setRequestIncrease();
+
+            if (selectedLibrary != null)
+            {
+                selectedLibrary.setRequestIncrease();
+                Enabled = false;
+                showMessageBox($"Заявка в {selectedLibrary.getManagement()} на увеличение фонда библиотеки отправлен!", "Вывод");
+                Enabled = true;
+                this.Activate();
+            }
+            else
+            {
+                Enabled = false;
+                showMessageBox("Объект не выбран", "Ошибка");
+                Enabled = true;
+                this.Activate();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LogsForm logsForm = new LogsForm();
+            logsForm.ShowDialog();
         }
     }
 }

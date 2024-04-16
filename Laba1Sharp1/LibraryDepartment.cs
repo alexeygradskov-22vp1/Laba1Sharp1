@@ -10,6 +10,8 @@ namespace Laba1Sharp1
     {
          static List<String> extensionRequests = new List<String>();
        static  List<String> increaseBooksRequests = new List<String>();
+
+        private String _name = "Отдел по делам библиотек";
         public void extensionRequest(string nameOfLibrary)
         {
             extensionRequests.Add(nameOfLibrary);
@@ -18,6 +20,11 @@ namespace Laba1Sharp1
         public void increaseBooksRequest(string nameOfLibrary)
         {
             increaseBooksRequests.Add(nameOfLibrary);
+        }
+
+        public String getName()
+        {
+            return _name;
         }
     }
 }

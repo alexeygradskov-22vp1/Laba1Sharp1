@@ -64,6 +64,8 @@
     <Compile Include="ArtisticBook.cs" />
     <Compile Include="Bibliographer.cs" />
     <Compile Include="Book.cs" />
+    <Compile Include="LibraryCommandAdd.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="CultureManagement.cs" />
     <Compile Include="CustInvalidArgumentException.cs" />
     <Compile Include="EducateBook.cs" />
@@ -71,6 +73,12 @@
     <Compile Include="Librarian.cs" />
     <Compile Include="LibraryDepartment.cs" />
     <Compile Include="LibraryFactory.cs" />
+    <Compile Include="LogsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogsForm.Designer.cs">
+      <DependentUpon>LogsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +104,9 @@
     <Compile Include="Test.Designer.cs">
       <DependentUpon>Test.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="LogsForm.resx">
+      <DependentUpon>LogsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

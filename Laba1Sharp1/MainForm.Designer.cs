@@ -56,6 +56,8 @@
             this.quantityOfBooksTB = new System.Windows.Forms.TextBox();
             this.nameInputTB = new System.Windows.Forms.TextBox();
             this.WorkWithSavedObjectsPlace = new System.Windows.Forms.Panel();
+            this.setIncreaseRequest = new System.Windows.Forms.Button();
+            this.setRequestExtensions = new System.Windows.Forms.Button();
             this.btnDetermineSpeedOfLists = new System.Windows.Forms.Button();
             this.btnShowListOfObjects = new System.Windows.Forms.Button();
             this.objectCounterLabel = new System.Windows.Forms.Label();
@@ -83,8 +85,7 @@
             this.addressChangeTB = new System.Windows.Forms.TextBox();
             this.avgNumberChangeTB = new System.Windows.Forms.TextBox();
             this.squareChangeTB = new System.Windows.Forms.TextBox();
-            this.setRequestExtensions = new System.Windows.Forms.Button();
-            this.setIncreaseRequest = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.CreateObjectsPlace.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.typeLibrary.SuspendLayout();
@@ -374,6 +375,7 @@
             // WorkWithSavedObjectsPlace
             // 
             this.WorkWithSavedObjectsPlace.AutoSize = true;
+            this.WorkWithSavedObjectsPlace.Controls.Add(this.button1);
             this.WorkWithSavedObjectsPlace.Controls.Add(this.setIncreaseRequest);
             this.WorkWithSavedObjectsPlace.Controls.Add(this.setRequestExtensions);
             this.WorkWithSavedObjectsPlace.Controls.Add(this.btnDetermineSpeedOfLists);
@@ -408,6 +410,26 @@
             this.WorkWithSavedObjectsPlace.Name = "WorkWithSavedObjectsPlace";
             this.WorkWithSavedObjectsPlace.Size = new System.Drawing.Size(528, 631);
             this.WorkWithSavedObjectsPlace.TabIndex = 1;
+            // 
+            // setIncreaseRequest
+            // 
+            this.setIncreaseRequest.Location = new System.Drawing.Point(290, 438);
+            this.setIncreaseRequest.Name = "setIncreaseRequest";
+            this.setIncreaseRequest.Size = new System.Drawing.Size(156, 60);
+            this.setIncreaseRequest.TabIndex = 45;
+            this.setIncreaseRequest.Text = "Заявка на увеличение книг";
+            this.setIncreaseRequest.UseVisualStyleBackColor = true;
+            this.setIncreaseRequest.Click += new System.EventHandler(this.setIncreaseRequest_Click);
+            // 
+            // setRequestExtensions
+            // 
+            this.setRequestExtensions.Location = new System.Drawing.Point(79, 438);
+            this.setRequestExtensions.Name = "setRequestExtensions";
+            this.setRequestExtensions.Size = new System.Drawing.Size(156, 60);
+            this.setRequestExtensions.TabIndex = 44;
+            this.setRequestExtensions.Text = "Заявка на раширение";
+            this.setRequestExtensions.UseVisualStyleBackColor = true;
+            this.setRequestExtensions.Click += new System.EventHandler(this.setRequestExtensions_Click);
             // 
             // btnDetermineSpeedOfLists
             // 
@@ -650,25 +672,15 @@
             this.squareChangeTB.Size = new System.Drawing.Size(265, 22);
             this.squareChangeTB.TabIndex = 22;
             // 
-            // setRequestExtensions
+            // button1
             // 
-            this.setRequestExtensions.Location = new System.Drawing.Point(79, 438);
-            this.setRequestExtensions.Name = "setRequestExtensions";
-            this.setRequestExtensions.Size = new System.Drawing.Size(156, 60);
-            this.setRequestExtensions.TabIndex = 44;
-            this.setRequestExtensions.Text = "Заявка на раширение";
-            this.setRequestExtensions.UseVisualStyleBackColor = true;
-            this.setRequestExtensions.Click += new System.EventHandler(this.setRequestExtensions_Click);
-            // 
-            // setIncreaseRequest
-            // 
-            this.setIncreaseRequest.Location = new System.Drawing.Point(290, 438);
-            this.setIncreaseRequest.Name = "setIncreaseRequest";
-            this.setIncreaseRequest.Size = new System.Drawing.Size(156, 60);
-            this.setIncreaseRequest.TabIndex = 45;
-            this.setIncreaseRequest.Text = "Заявка на увеличение книг";
-            this.setIncreaseRequest.UseVisualStyleBackColor = true;
-            this.setIncreaseRequest.Click += new System.EventHandler(this.setIncreaseRequest_Click);
+            this.button1.Location = new System.Drawing.Point(360, 559);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(156, 60);
+            this.button1.TabIndex = 46;
+            this.button1.Text = "Открыть логи";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainForm
             // 
@@ -753,6 +765,7 @@
         private System.Windows.Forms.RadioButton CultManagementRB;
         private System.Windows.Forms.Button setIncreaseRequest;
         private System.Windows.Forms.Button setRequestExtensions;
+        private System.Windows.Forms.Button button1;
     }
 }
 

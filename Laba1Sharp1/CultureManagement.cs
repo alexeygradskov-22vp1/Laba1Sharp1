@@ -11,7 +11,7 @@ namespace Laba1Sharp1
         List<String> extensionRequests = new List<String>();
         List<String> increaseBooksRequests = new List<String>();
 
-
+        private String _name = "Министерство культуры";
         public void extensionRequest(string nameOfLibrary)
         {
             extensionRequests.Add(nameOfLibrary);
@@ -20,6 +20,11 @@ namespace Laba1Sharp1
         public void increaseBooksRequest(string nameOfLibrary)
         {
             increaseBooksRequests.Add(nameOfLibrary);
+        }
+
+        public String getName()
+        {
+            return _name;
         }
     }
 }
